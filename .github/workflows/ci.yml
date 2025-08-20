@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]         # cambia in 'master' se il tuo branch si chiama così
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:           # permette l'avvio manuale dal tab Actions/Azioni
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'   # metti '20' se il progetto richiede Node 20
+          cache: 'npm'         # abilita cache automatica per npm
+
+      # Se hai package-lock.json, in CI è meglio 'npm ci'
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # Cambia questi comandi in base agli script del tuo package.json
+      - name: Build
+        run: |
+          if npm run | grep -q " build"; then
+            npm run build
+          else
+            echo "Nessuno script build, salto."
+          fi
+
+      - name: Test
+        run: |
+          if npm run | grep -q " test"; then
+            npm test
+          else
+            echo "Nessuno script test, salto."
+          fi
