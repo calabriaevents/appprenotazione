@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ main ]         # cambia in 'master' se il tuo branch si chiama così
+    branches: [ main ]         # cambia se il tuo branch principale ha un altro nome
   pull_request:
     branches: [ main ]
-  workflow_dispatch:           # permette l'avvio manuale dal tab Actions/Azioni
+  workflow_dispatch:           # permette l’avvio manuale
 
 jobs:
   build:
@@ -15,13 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'   # metti '20' se il progetto richiede Node 20
-          cache: 'npm'         # abilita cache automatica per npm
+          node-version: '18'   # cambia se serve Node 20
 
-      # Se hai package-lock.json, in CI è meglio 'npm ci'
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
@@ -30,8 +28,7 @@ jobs:
             npm install
           fi
 
-      # Cambia questi comandi in base agli script del tuo package.json
-      - name: Build
+      - name: Build (opzionale)
         run: |
           if npm run | grep -q " build"; then
             npm run build
@@ -39,7 +36,7 @@ jobs:
             echo "Nessuno script build, salto."
           fi
 
-      - name: Test
+      - name: Test (opzionale)
         run: |
           if npm run | grep -q " test"; then
             npm test
