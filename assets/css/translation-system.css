@@ -1,0 +1,76 @@
+/*
+ * translation-system.css
+ * This file contains styles dedicated to the visual feedback of the translation system.
+ */
+
+/* Style for elements that are currently being translated in a batch */
+.batch-translating {
+  position: relative;
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* Loading spinner animation for elements being translated */
+.batch-translating::after {
+  content: '...';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--calabria-blue, #003366);
+  animation: spin 1s ease-in-out infinite;
+}
+
+/* Style for elements whose translation is served from cache */
+.cache-hit::before {
+  content: '💾'; /* Floppy disk icon to indicate a cache hit */
+  margin-right: 8px;
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+/* Simple fade-in animation for status messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Progress bar for the bulk translation process in the admin panel */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #e5e7eb; /* gray-200 */
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background-color: var(--calabria-blue, #003366);
+  width: 0%; /* Will be updated via JavaScript */
+  transition: width 0.3s ease-in-out;
+  text-align: center;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 20px;
+}
