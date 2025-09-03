@@ -1,0 +1,110 @@
+/*
+ * style.css
+ * This file contains all custom styles that give the site its unique identity.
+ */
+
+/* Custom CSS Variables for brand colors */
+:root {
+  --calabria-blue: #003366; /* A deep, professional blue */
+  --calabria-gold: #FFD700; /* A prestigious gold */
+  --calabria-gray-light: #f3f4f6;
+  --calabria-gray-dark: #333333;
+}
+
+/* Custom gradient classes */
+.bg-calabria-gradient {
+  background-image: linear-gradient(to right, var(--calabria-blue), #005c99);
+}
+
+.text-calabria-gradient {
+  background: linear-gradient(to right, var(--calabria-blue), var(--calabria-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Custom utility classes from the description */
+.text-giallo-200 {
+    color: #fde68a; /* A light yellow, similar to Tailwind's 200 */
+}
+
+.text-giallo-400 {
+    color: #facc15; /* A standard yellow, similar to Tailwind's 400 */
+}
+
+.bg-giallo-500 {
+    background-color: #eab308; /* A darker yellow, similar to Tailwind's 500 */
+}
+
+/* Animation for elements to fade in and move up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Styles for prose content (articles, static pages) */
+.prose {
+  color: #374151; /* gray-700 */
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  color: var(--calabria-blue);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose h1 { font-size: 2.25rem; } /* text-4xl */
+.prose h2 { font-size: 1.875rem; } /* text-3xl */
+.prose h3 { font-size: 1.5rem; } /* text-2xl */
+
+.prose p {
+  line-height: 1.75;
+  margin-bottom: 1.25em;
+}
+
+.prose a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #1d4ed8; /* blue-800 */
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25em;
+}
+
+.prose th, .prose td {
+  border: 1px solid #d1d5db; /* gray-300 */
+  padding: 0.75em 1em;
+}
+
+.prose th {
+  background-color: var(--calabria-gray-light);
+  font-weight: 600;
+}
